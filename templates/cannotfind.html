@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>LOADING</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet"
+          href="/static/SS.css">-->
+    <style>
+        body {
+            background-color: #cfd8dc;
+        }
+
+        div {
+            background-color: #cfd8dc;
+            font-family: 'Nanum Myeongjo', serif;
+            color: #37474f;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="container">
+        <header>
+            <img src="../static/header.png">
+        </header>
+        <br>
+
+        <div id="loginer">
+
+            <div id="form">
+                <form action="http://localhost:5000/uploader" method="post"
+                      enctype="multipart/form-data">
+
+                      <img src="{{url_for('static',filename='/uploader/'+name)}}" width="300" height="300" />
+                    <br />
+                    <p>고막을 찾을 수 없습니다.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

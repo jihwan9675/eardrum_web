@@ -1,0 +1,10 @@
+a@a 1
+test@gmail.com 1234
+test 456
+wg0705@b 1
+a a
+white 123
+whiteman 123
+a a
+123a a
+123 a

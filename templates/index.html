@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Nunito:400,700" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='demo.css')}}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-adsila.css')}}" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<style>
+          body {
+            background-color: #cfd8dc;
+           }
+           div{
+               text-align: center;
+           }
+           a{
+            text-align: center;
+           }
+        </style>
+
+	</head>
+	<body class="demo-adsila">
+        <main>
+            <div style="left:200px;">
+                <img src="{{ url_for('static', filename='header.png')}}">
+            </div>
+            <section class="content">
+                <nav class="menu menu--adsila">
+                    <a class="menu__item" href="{{ url_for('static', filename='login.html')}}">
+                        <span class="menu__item-name">진단받기</span>
+                        <span class="menu__item-label">진단 전에 로그인이 필요합니다.</span> 
+                    </a>
+                    <a class="menu__item" href="{{ url_for('static', filename='signup.html')}}">
+                        <span class="menu__item-name">회원가입</span>
+                        <span class="menu__item-label">간단 가입을 하시고 이용하세요.</span>
+                    </a>
+                </nav>
+            </section>
+        </main>
+		<script src="js/demo.js"></script>
+	</body>
+</html>

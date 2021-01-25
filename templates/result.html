@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>LOADING</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet"
+          href="/static/SS.css">-->
+    <style>
+        body {
+            background-color: #cfd8dc;
+        }
+        header{text-align: center;}
+        div {
+            background-color: #cfd8dc;
+            font-family: 'Nanum Myeongjo', serif;
+            color: #37474f;
+            float: left;
+        }
+        #original{text-align: center;}
+        #detected{
+            text-align: center;
+        }
+        #cropped{
+            text-align: center;
+        }
+        
+    </style>
+</head>
+
+
+<body>
+    <div id="container">
+        <header>
+            <img src="../static/header.png">
+        </header>
+        <br>
+
+        <div id="loginer">
+
+            <div id="form">
+                <form action="http://localhost:5000/uploader" method="post"
+                    enctype="multipart/form-data">
+                    <div>
+                        <div id="original">
+                            <img src="{{url_for('static',filename='./uploader/'+name)}}" width="300" height="300" />
+                            <br>
+                            <p>Original Image</p> 
+                        </div>
+                        <div id="detected">
+                            <img src="{{url_for('static',filename='./uploader/detected'+name)}}" width="300" height="300" />
+                            <p>Detected Image</p> 
+                        </div>
+                        <div id="cropped">
+                            <img src="{{url_for('static',filename='./uploader/cropped'+name)}}" width="300" height="300" />
+                            <p>Cropped Image</p> 
+                        </div>
+                        <br />
+                    </div>
+                    </br>
+                </form>
+            </div>
+            <p></p>
+            <br>
+            
+        </div>
+        <p></p>
+        <div><h2><b><br><br/>진단 결과 : {{disease}} ({{acc}}%)</b></h2></div>
+        
+    </div>
+</body>
+</html>

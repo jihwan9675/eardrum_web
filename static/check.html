@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>LOADING</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet"
+          href="/static/SS.css">-->
+    <style>
+        body {
+             background-color: #cfd8dc;
+        }
+        div {
+             background-color: #cfd8dc;
+             font-family: 'Nanum Myeongjo', serif;
+             color: #37474f;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="container">
+        <header>
+            <img src="header.png">
+        </header>
+        <br>
+
+        <div id="loginer">
+
+            <div id="form">
+                <form>
+
+                    <!--<img src="./uploader/uploaded.jpg" />-->
+                    <br />
+                    <iframe class="loading" src="loading.html" width="300" height="300" frameborder="0" scrolling="no"></iframe>
+                    <br />
+                    <p>이미지를 프로세싱하고 있습니다…</p>
+                    <!--<meta http-equiv="refresh" content="5; url=./result.html">-->
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <form id="Hidden_form" method="post" action="http://localhost:5000/result" enctype="multipart/form-data">
+        <input type="hidden"/>
+    </form>
+    <script language="javascript">
+        document.getElementById("Hidden_form").submit();
+    </script>
+</body>
+</html>

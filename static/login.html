@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>LOGIN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet"
+          href="/static/SS.css">-->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Girassol&display=swap');
+        body {
+            background-color: #cfd8dc;
+        }
+        button {
+            position: relative;
+            width: 80px;
+            height: 60px;
+            left: 300px;
+            bottom: 80px;
+            background-color: #37474f;
+            color: #ffffff;
+        }
+        .button {
+            background-color: #37474f;
+            color: #ffffff;
+            width: 70px;
+            height: 30px;
+        }
+        label.header {
+            font-family: 'Girassol', cursive;
+            font-size: xx-large;
+            color: #37474f;
+        }
+        fieldset {
+            position: absolute;
+            left: 100px;
+            width: 400px;
+            font-family: 'Nanum Myeongjo', serif;
+            color: #37474f;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <img src="header.png">
+    </header>
+    <br>
+    
+    <fieldset>
+        <legend><label class="header">Login</label></legend>
+        <form action="http://127.0.0.1:5000/login" method="post"
+              onsubmit="return checkBlank()">
+
+            <label for="id">Email : </label>
+            <input type="text" style="width:220px;" id="login_id" name="login_id" placeholder="Enter Your Email">
+            <br><br>
+
+            <label for="pwd1">PW : </label>
+            <input type="password" style="width:235px;" id="login_pwd" name="login_pwd" placeholder="Enter Your Password">
+            <br><br>
+
+            <button type="submit">LOGIN</button>
+
+            You Don't Have Your Account? <input type="button" class="button" value="SIGN UP"
+                                                onclick="location.href='./signup.html'" /><br />
+        </form>
+    </fieldset>
+    <script>
+
+        function checkBlank() {
+
+            var login_pwd = document.getElementsByName("login_pwd");
+            var login_id = document.getElementsByName("login_id");
+
+            if (login_id[0].value == "" || login_pwd[0].value == "") {
+
+                alert("빈칸이 있습니다.");
+                return false;
+
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

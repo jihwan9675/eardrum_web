@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>SIGN UP</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet"
+          href="/static/SS.css">-->
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Girassol&display=swap');
+
+        body {
+            background-color: #cfd8dc;
+        }
+
+        button {
+            position: relative;
+            width: 150px;
+            height: 30px;
+            left: 50px;
+            background-color: #37474f;
+            color: #ffffff;
+        }
+
+        input.button {
+            position: relative;
+            width: 150px;
+            height: 30px;
+            left: 50px;
+            background-color: #37474f;
+            color: #ffffff;
+        }
+
+        label.header {
+            font-family: 'Girassol', cursive;
+            font-size: xx-large;
+            color: #37474f;
+        }
+
+        fieldset {
+            position: absolute;
+            left: 100px;
+            width: 350px;
+            font-family: 'Nanum Myeongjo', serif;
+            color: #37474f;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+        <img src="header.png">
+    </header>
+    <br>
+    <fieldset>
+        <legend><label class="header">Sign Up</label></legend>
+        <form action="http://127.0.0.1:5000/signup" method="post"
+              onsubmit="return getTextValue()">
+
+            <label for="sign_id">Email : </label>
+            <input type="text" style="width:205px;" id="sign_id" name="sign_id"
+                   placeholder="Enter Your Email"
+                    title="이메일" />
+            <br><br>
+
+            <label for="sign_pwd1">PW : </label>
+            <input type="password" style="width:220px;" id="sign_pwd1" name="sign_pwd1" placeholder="Enter Your Password">
+            <br><br>
+
+            <label for="sign_pwd2">PW 확인 : </label>
+            <input style="width:185px;" type="password" id="sign_pwd2" name="sign_pwd2" placeholder="Check Your Password">
+            <br><br>
+
+            <button type="submit">SIGN UP</button>
+            <input type="button" class="button" value="BACK"
+                   onclick="removeCheck()" />
+
+        </form>
+    </fieldset>
+    
+    <script>
+
+        function getTextValue() {
+
+            var sign_pwd1 = document.getElementsByName("sign_pwd1");
+            var sign_pwd2 = document.getElementsByName("sign_pwd2");
+            var sign_id = document.getElementsByName("sign_id");
+
+            if (sign_id[0].value == "" || sign_pwd1[0].value == "" || sign_pwd2[0].value == "") {
+
+                alert("빈칸이 있습니다.");
+                return false;
+
+            }
+            if (sign_pwd1[0].value == sign_pwd2[0].value) {
+
+                alert("회원가입에 성공하였습니다.");
+                return true;
+
+            } else {
+
+                alert("패스워드가 서로 틀립니다.\n확인해주세요");
+                return false;
+
+            }
+        }
+
+        function removeCheck() {
+
+            if (confirm("정말 뒤로가시겠습니까??") == true) {    //확인
+
+                return location.href = './login.html';
+
+            } else {   //취소
+
+                return false;
+
+            }
+
+        }
+
+    </script>
+</body>
+</html>
