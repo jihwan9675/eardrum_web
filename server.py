@@ -6,7 +6,8 @@ from flask import Flask, Blueprint, request, render_template, flash, redirect, u
 from flask import current_app as app
 from werkzeug.utils import secure_filename
 from pathlib import Path
-import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket
+from dynamodb.dynamodb import dynamoDBsignin, dynamoDBcheckLogin, makemd5
+import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket, hashlib
 
 app = Flask(__name__) 
 eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
@@ -27,10 +28,12 @@ def signup():
     if request.method == "POST":
         sign_id = request.form['sign_id']
         sign_pwd = request.form['sign_pwd1']
-        loginFile = open("./static/login.txt", 'a')
-        loginFile.write(sign_id + " " + sign_pwd + "\n")
-        loginFile.close()
-        return render_template('login.html')
+        # Password -> md5
+        after_password = makemd5(sign_pwd)
+
+        # Put data in AWS DynamoDB
+        if dynamoDBsignin(sign_id, after_password):
+            return render_template('login.html', host=host, port=port)
     return render_template('signup.html', host=host, port=port)
 
 # Login Page ... I have to add AWS DynamoDB and GraphQL code.
@@ -40,13 +43,10 @@ def login():
     if request.method == 'POST':
         value_id = request.form['login_id']
         value_pwd = request.form['login_pwd']
-        value = value_id + " " + value_pwd + "\n"
-        loginFile = open("./static/login.txt", 'r')
-        lines = loginFile.readlines()
-        loginFile.close()
-        isSame = False
-        if value in lines:
-            return render_template('upload.html')
+        after_password = makemd5(value_pwd)
+
+        if dynamoDBcheckLogin(value_id, after_password):
+            return render_template('upload.html', host=host, port=port)
     return render_template('login.html', host=host, port=port)
 
 sub = 0
@@ -84,10 +84,9 @@ def sendPacket(imageName):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # DeepLearning Server's Host, Port
-    HOST = '127.0.0.1'  
-    PORT = 9999   
-    # (Host = 127.0.0.1 / Port = 9999) -> DeepLearning Server
-    client_socket.connect((HOST, PORT))
+    Deep_HOST = '127.0.0.1'  
+    Deep_PORT = 9999
+    client_socket.connect((Deep_HOST, Deep_PORT))
     client_socket.sendall(imageName.encode())
 
     # Receive predicted result from DeepLearning Server
