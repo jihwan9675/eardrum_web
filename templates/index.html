@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="ko" class="no-js">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,17 +27,17 @@
             </div>
             <section class="content">
                 <nav class="menu menu--adsila">
-                    <a class="menu__item" href="{{ url_for('static', filename='login.html')}}">
+                    <a class="menu__item" href="{{ url_for('login')}}">
                         <span class="menu__item-name">진단받기</span>
                         <span class="menu__item-label">진단 전에 로그인이 필요합니다.</span> 
                     </a>
-                    <a class="menu__item" href="{{ url_for('static', filename='signup.html')}}">
+                    <a class="menu__item" href="{{ url_for('signup')}}">
                         <span class="menu__item-name">회원가입</span>
                         <span class="menu__item-label">간단 가입을 하시고 이용하세요.</span>
                     </a>
                 </nav>
             </section>
         </main>
-		<script src="js/demo.js"></script>
+		<script src="{{ url_for('static', filename='js/demo.js')}}"></script>
 	</body>
 </html>

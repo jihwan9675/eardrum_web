@@ -33,14 +33,14 @@
 <body>
     <div id="container">
         <header>
-            <img src="../static/header.png">
+            <img src="{{ url_for('static', filename='header.png')}}">
         </header>
         <br>
 
         <div id="loginer">
 
             <div id="form">
-                <form action="http://localhost:5000/uploader" method="post"
+                <form action="http://{{host}}:{{port}}/uploader" method="post"
                     enctype="multipart/form-data">
                     <div>
                         <div id="original">

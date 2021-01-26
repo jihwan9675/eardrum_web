@@ -23,7 +23,7 @@
 <body>
     <div id="container">
         <header>
-            <img src="header.png">
+            <img src="{{ url_for('static', filename='header.png')}}">
         </header>
         <br>
 
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <form id="Hidden_form" method="post" action="http://localhost:5000/result" enctype="multipart/form-data">
+    <form id="Hidden_form" method="post" action="http://{{host}}:{{port}}/result" enctype="multipart/form-data">
         <input type="hidden"/>
     </form>
     <script language="javascript">

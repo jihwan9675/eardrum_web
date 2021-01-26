@@ -45,13 +45,13 @@
 
 <body>
     <header>
-        <img src="header.png">
+        <img src="{{ url_for('static', filename='header.png')}}">
     </header>
     <br>
     
     <fieldset>
         <legend><label class="header">Login</label></legend>
-        <form action="http://127.0.0.1:5000/login" method="post"
+        <form action="http://{{host}}:{{port}}/login" method="post"
               onsubmit="return checkBlank()">
 
             <label for="id">Email : </label>
@@ -65,7 +65,7 @@
             <button type="submit">LOGIN</button>
 
             You Don't Have Your Account? <input type="button" class="button" value="SIGN UP"
-                                                onclick="location.href='./signup.html'" /><br />
+                                                onclick="location.href='{{ url_for('signup')}}'" /><br />
         </form>
     </fieldset>
     <script>

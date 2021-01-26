@@ -12,9 +12,9 @@ app = Flask(__name__)
 eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
             "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"] # output
 
-# DeepLearning Server's Host, Port
-HOST = '127.0.0.1'  
-PORT = 9999   
+# Server's Host, Port
+host = '127.0.0.1'  
+port = "8888"
 
 # First page (./templates/index.html)
 @app.route('/')
@@ -23,14 +23,15 @@ def index():
 
 # Singup page (./static/signup.html)
 @app.route('/signup', methods=['GET', 'POST'])
-def signup(): 
-    sign_id = request.form['sign_id']
-    sign_pwd = request.form['sign_pwd1']
-    loginFile = open("./static/login.txt", 'a')
-    loginFile.write(sign_id + " " + sign_pwd + "\n")
-    loginFile.close()
-    if True:
-        return redirect(url_for('static', filename='login.html'))
+def signup():
+    if request.method == "POST":
+        sign_id = request.form['sign_id']
+        sign_pwd = request.form['sign_pwd1']
+        loginFile = open("./static/login.txt", 'a')
+        loginFile.write(sign_id + " " + sign_pwd + "\n")
+        loginFile.close()
+        return render_template('login.html')
+    return render_template('signup.html', host=host, port=port)
 
 # Login Page ... I have to add AWS DynamoDB and GraphQL code.
 # Login page (./static/login.html)
@@ -44,12 +45,9 @@ def login():
         lines = loginFile.readlines()
         loginFile.close()
         isSame = False
-
-        for line in lines:
-            if line == value:
-                return redirect(url_for('static', filename='upload.html'))
-            
-        return redirect(url_for('static', filename='login.html'))
+        if value in lines:
+            return render_template('upload.html')
+    return render_template('login.html', host=host, port=port)
 
 sub = 0
 # Image upload page
@@ -79,12 +77,15 @@ def uploader():
         acc = round(float(detectedCount_diseaseIndex_accuracy[2])*100,2)
 
         if detectedCount == 0:
-            return render_template('cannotfind.html', name=imageName)
-        return render_template('result.html', name=imageName, disease=disease, acc=acc)
+            return render_template('cannotfind.html', name=imageName, host=host, port=port)
+        return render_template('result.html', name=imageName, disease=disease, acc=acc, host=host, port=port)
 
 def sendPacket(imageName):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+    # DeepLearning Server's Host, Port
+    HOST = '127.0.0.1'  
+    PORT = 9999   
     # (Host = 127.0.0.1 / Port = 9999) -> DeepLearning Server
     client_socket.connect((HOST, PORT))
     client_socket.sendall(imageName.encode())
@@ -97,4 +98,4 @@ def sendPacket(imageName):
     return str(data.decode())
 
 if __name__=='__main__':
-    app.run(host="127.0.0.1", port="5000", debug=True)
+    app.run(host=host, port=port, debug=True)

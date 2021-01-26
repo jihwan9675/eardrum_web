@@ -51,12 +51,12 @@
 
 <body>
     <header>
-        <img src="header.png">
+        <img src="{{ url_for('static', filename='header.png')}}">
     </header>
     <br>
     <fieldset>
         <legend><label class="header">Sign Up</label></legend>
-        <form action="http://127.0.0.1:5000/signup" method="post"
+        <form action="http://{{host}}:{{port}}/signup" method="post"
               onsubmit="return getTextValue()">
 
             <label for="sign_id">Email : </label>
@@ -111,7 +111,7 @@
 
             if (confirm("정말 뒤로가시겠습니까??") == true) {    //확인
 
-                return location.href = './login.html';
+                return location.href = '{{ url_for('login')}}';
 
             } else {   //취소
 
