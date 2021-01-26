@@ -10,10 +10,12 @@ from dynamodb.dynamodb import dynamoDBsignin, dynamoDBcheckLogin, makemd5
 import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket, hashlib
 
 app = Flask(__name__) 
-eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
-            "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"] # output
 
-# Server's Host, Port
+# Output List
+eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
+            "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
+
+# Web Server's Host, Port
 host = '127.0.0.1'  
 port = "8888"
 
@@ -22,7 +24,7 @@ port = "8888"
 def index(): 
     return render_template('index.html')
 
-# Singup page (./static/signup.html)
+# Singup page (./templates/signup.html)
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
@@ -37,7 +39,7 @@ def signup():
     return render_template('signup.html', host=host, port=port)
 
 # Login Page ... I have to add AWS DynamoDB and GraphQL code.
-# Login page (./static/login.html)
+# Login page (./templates/login.html)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -49,10 +51,9 @@ def login():
             return render_template('upload.html', host=host, port=port)
     return render_template('login.html', host=host, port=port)
 
-sub = 0
 # Image upload page
 # Save Image and Predict in this method.
-# Image Upload page (./static/upload.html)
+# Image Upload page (./templates/upload.html)
 @app.route('/uploader', methods=['GET', 'POST'])
 def uploader():
     if request.method == 'POST':
