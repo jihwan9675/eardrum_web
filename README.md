@@ -5,3 +5,6 @@
  - 환경 : Tensorflow 2.3.1
  - server.py로 웹서버를 구동시키고
  - /maskrcnn/deeplearningServer.py 도 같이 구동시켜야한다.
+ - 환경변수 설정을 해야한다.
+  - aws_access_key_id : your aws id key
+  - aws_secret_access_key : your secret key
