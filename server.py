@@ -15,9 +15,10 @@ app = Flask(__name__)
 eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otitis Media",
             "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
 
-# Web Server's Host, Port
+# http://host:port/
+# ex) http://127.0.0.1:80/
 host = '127.0.0.1'  
-port = "8888"
+port = "80"
 
 # First page (./templates/index.html)
 @app.route('/')
@@ -98,4 +99,4 @@ def sendPacket(imageName):
     return str(data.decode())
 
 if __name__=='__main__':
-    app.run(host=host, port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)
