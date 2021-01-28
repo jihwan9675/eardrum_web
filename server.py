@@ -6,7 +6,7 @@ from flask import Flask, Blueprint, request, render_template, flash, redirect, u
 from flask import current_app as app
 from werkzeug.utils import secure_filename
 from pathlib import Path
-from dynamodb.dynamodb import dynamoDBsignin, dynamoDBcheckLogin, makemd5
+from modules.dynamodb import dynamoDBsignin, dynamoDBcheckLogin, makemd5
 import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket, hashlib
 
 app = Flask(__name__) 

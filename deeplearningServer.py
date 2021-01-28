@@ -25,17 +25,17 @@ from modules.build_model import build_model
 HOST = '127.0.0.1'   
 PORT = 9999
 
-directory = "../static/uploader/" # Image Save path
+directory = "./static/uploader/" # Image Save path
 
 # Laod MASK R-CNN Model
 config = InferenceConfig()
 config.display()
 model = modellib.MaskRCNN(mode="inference", config=config, model_dir="./logs")
-model.load_weights("./Weight/mask_rcnn_eardrum_0043.h5", by_name=True)
+model.load_weights("./static/Weight/mask_rcnn_eardrum_0043.h5", by_name=True)
 
 # Load Classification Model
 classificationModel = build_model(6)
-classificationModel.load_weights("./Weight/efficientNetB0.h5")
+classificationModel.load_weights("./static/Weight/efficientNetB0.h5")
 
 def detect_roi(model, image_path=None):
     image = skimage.io.imread(directory+image_path)
