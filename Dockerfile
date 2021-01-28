@@ -3,8 +3,10 @@ COPY . /app
 WORKDIR /app
 RUN apt-get update && \
     apt-get install libgl1-mesa-glx -y
+RUN chmod 755 deeplearningServer.py
+RUN chmod 755 server.py
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
-ENTRYPOINT ["python","./maskrcnn/deeplearningServer.py"]
 EXPOSE 80
-CMD ["python", "./server.py"]
+ENTRYPOINT [ "nohup","python","deeplearningServer.py","&" ]
+CMD [ "python","server.py","&" ]

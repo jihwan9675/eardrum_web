@@ -36,7 +36,7 @@
         <img src="{{ url_for('static', filename='header.png')}}">
     </header>
     <br>
-    <form action="http://{{host}}:{{port}}/uploader" method="post"
+    <form action="/uploader" method="post"
           enctype="multipart/form-data">
 
         <label style="color:#37474f; font-family: 'Nanum Myeongjo', serif;">파일을 업로드하시면 진단 결과를 확인하실 수 있습니다.</label> <br /><br />

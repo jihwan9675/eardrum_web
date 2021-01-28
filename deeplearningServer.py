@@ -75,6 +75,7 @@ def predictEardiease(image_path):
     return idx, max_value
 
 def main():
+    print("DeepLearningServer Start")
     while True:
         # Create Socket
         server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
