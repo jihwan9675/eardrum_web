@@ -7,7 +7,7 @@ from flask import current_app as app
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from modules.dynamodb import dynamoDBsignin, dynamoDBcheckLogin, makemd5
-import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket, hashlib
+import os, csv, cv2, sys, numpy, h5py, time, skimage.draw, datetime, socket, hashlib, multiprocessing, deeplearningServer
 
 app = Flask(__name__) 
 
@@ -36,8 +36,8 @@ def signup():
 
         # Put data in AWS DynamoDB
         if dynamoDBsignin(sign_id, after_password):
-            return render_template('login.html', host=host, port=port)
-    return render_template('signup.html', host=host, port=port)
+            return render_template('login.html')
+    return render_template('signup.html')
 
 # Login Page ... I have to add AWS DynamoDB and GraphQL code.
 # Login page (./templates/login.html)
@@ -49,8 +49,8 @@ def login():
         after_password = makemd5(value_pwd)
 
         if dynamoDBcheckLogin(value_id, after_password):
-            return render_template('upload.html', host=host, port=port)
-    return render_template('login.html', host=host, port=port)
+            return render_template('upload.html')
+    return render_template('login.html')
 
 # Image upload page
 # Save Image and Predict in this method.
@@ -79,8 +79,8 @@ def uploader():
         acc = round(float(detectedCount_diseaseIndex_accuracy[2])*100,2)
 
         if detectedCount == 0:
-            return render_template('cannotfind.html', name=imageName, host=host, port=port)
-        return render_template('result.html', name=imageName, disease=disease, acc=acc, host=host, port=port)
+            return render_template('cannotfind.html', name=imageName)
+        return render_template('result.html', name=imageName, disease=disease, acc=acc)
 
 def sendPacket(imageName):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -99,4 +99,10 @@ def sendPacket(imageName):
     return str(data.decode())
 
 if __name__=='__main__':
+    import multiprocessing
+    import deeplearningServer
+    proc = multiprocessing.Process(target=deeplearningServer.main) 
+    proc.daemon=True
+    proc.start()
     app.run(host='0.0.0.0', port=port, debug=True)
+    
