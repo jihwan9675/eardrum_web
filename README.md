@@ -8,3 +8,4 @@
   - aws_access_key_id : your aws id key
   - aws_secret_access_key : your secret key
  - Dockerfile에도 AWS(DynamoDB)환경변수 추가 해야합니다.
+ - Weight 파일은 의료데이터로 문제발생요지가 있어 공유하지 못합니다.
