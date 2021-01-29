@@ -3,8 +3,8 @@
 ### 수정날 : 21.01.25.
 ### jihwan9675@gmail.com
  - 환경 : Tensorflow 2.3.1
- - server.py로 웹서버를 구동시키고
- - /maskrcnn/deeplearningServer.py 도 같이 구동시켜야한다.
- - 환경변수 설정을 해야한다.
+ - server.py로 웹서버를 구동시킵니다.
+ - 로컬에서 사용시 AWS DynamoDB 환경변수 설정
   - aws_access_key_id : your aws id key
   - aws_secret_access_key : your secret key
+ - Dockerfile에도 AWS(DynamoDB)환경변수 추가 해야합니다.
