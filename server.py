@@ -1,7 +1,7 @@
-# writer = newjihwan
+# Writer = newjihwan
 # lastest = 21.01.22. 22:17
 # Composition[Front, Backend, DB]
-# server.py is Backend. We also have DeepLearning(MASKRCNN+classification) Server(./maskrcnn/deeplearningServer.py)
+# server.py is Backend. I also have DeepLearning(MASKRCNN+classification) Server(./deeplearningServer.py)
 from flask import Flask, Blueprint, request, render_template, flash, redirect, url_for
 from flask import current_app as app
 from werkzeug.utils import secure_filename
@@ -16,8 +16,8 @@ eardrum = ["Normal","Traumatic Perforation", "Acute Otitis Media", "Chronic Otit
             "Congential Cholesteatoma", "Otitis Media with Effusion", "I don't know"]
 
 # http://host:port/
-# ex) http://127.0.0.1:80/
-host = '127.0.0.1'  
+# ex) http://0.0.0.0:80/ '0.0.0.0' = My IP
+host = '0.0.0.0'  
 port = "80"
 
 # First page (./templates/index.html)
@@ -39,7 +39,7 @@ def signup():
             return render_template('login.html')
     return render_template('signup.html')
 
-# Login Page ... I have to add AWS DynamoDB and GraphQL code.
+# Login Page ... I have to add GraphQL code.
 # Login page (./templates/login.html)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -104,5 +104,5 @@ if __name__=='__main__':
     proc = multiprocessing.Process(target=deeplearningServer.main) 
     proc.daemon=True
     proc.start()
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host=host, port=port, debug=True)
     
